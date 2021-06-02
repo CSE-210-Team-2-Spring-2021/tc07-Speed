@@ -1,0 +1,39 @@
+Classes: TJ -Floater/Helper
+input_service (from template)
+output_service (from solo) - Lucas
+director (from solo) - Kyle
+actor(from solo)
+words - Nathaniel 
+score(from solo)
+coordinate(point)(from solo)
+compare - Chase
+
+words.py (Actor)
+	Information Holder - Selects and tracks the words going across the screen.
+	
+	Something will need to be returned to the output_service
+	
+	Randomly choose 5 words from the words.txt (make sure they aren't duplicates)
+	
+	Attributes:
+		_words (list)
+		_words_guessed(list)
+		_points(list) (score)
+		
+	Methods
+	init
+	set_words - choose 5 words (later on, select point values) gives 5 random starting locations (make sure y's don't double up)
+	move_words - Updates the position of word based on velocity (look at snake.py)
+	update_words(param - index) - move the word at given index from _words to _words_guessed
+	get_words - Returns _words list
+	get_points - returns point value (score)
+	
+compare.py 
+	Service Provider - Compares what is typed in Buffer with word list from words.py
+	Returns - index of matched word, maybe true or false?
+	
+	Method
+	
+	compare_words(Param - words, bufferthing) - Returns index if there is a match otherwise return 9999999
+	
+	
