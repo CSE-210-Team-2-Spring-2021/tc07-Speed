@@ -20,7 +20,7 @@ class WordManager:
         """The class Constructor
 
         Args:
-            self - An instance of Food 
+            self -  An instance of WordManager 
         
         """
         self._word_strings = ['', '', '', '', '']
@@ -31,7 +31,7 @@ class WordManager:
         """Sets the field with new words.
         
         Args:
-            self - An instance of Food 
+            self -  An instance of WordManager
         """
         self._choose_words()
         self._set_words()
@@ -40,7 +40,7 @@ class WordManager:
         """Selects 5 words and adds them to the _words lists
         
         Args:
-            self - An instance of Food 
+            self -  An instance of WordManager 
         """
         all_words = constants.LIBRARY
         value_range = range(len(all_words))
@@ -54,7 +54,7 @@ class WordManager:
         """Update the values of the _words list
         
         Args:
-            self - An instance of Food 
+            self -  An instance of WordManager
         """
         num_words = constants.STARTING_WORDS
         x_range = range(constants.MAX_X)
@@ -71,25 +71,26 @@ class WordManager:
         """Updates the position of word based on velocity (look at snake.py)
 
         Args:
-            self - An instance of Food"""
+            self -  An instance of WordManager
+        """
         for word in self._words:
             word.move_next()
 
     def update_words(self, i):
-        """Move the word at given index from _words to _words_guessed
+        """Move the word at given index from _words to _words_guessed update the word
         
         Args:
-            self - An instance of Food
+            self - An instance of WordManager
             i - index of matching word 
         """
         self._words_guessed.append(self._word_strings[i])
-        self._word_strings.pop[i]
+        self._words[i].word_typed()
 
     def get_words_string(self):
         """Returns _words_string list
         
         Args:
-            self - An instance of Food 
+            self - An instance of WordManager
         """
         return self._words_string
         
@@ -97,15 +98,48 @@ class WordManager:
         """Returns _words list
         
         Args:
-            self - An instance of Food 
+            self - An instance of WordManager
+
+        Returns:
+            self._words - list of Word Objects
         """
         return self._words
 
     def get_points(self):
-        """returns point value (score)
+        """Returns point value list(score)
         
         Args:
-            self - An instance of Food 
+            self - An instance of WordManager
+
+        Returns:
+            self._points - list containing all five current point values
         """
 
         return self._points
+
+    def get_points(self, i):
+        """Returns point value (score)
+        
+        Args:
+            self - An instance of WordManager
+
+        Returns:
+            self._points[i] - singular point value chosen by index
+        """
+
+        return self._points[i]
+
+    def all_typed(self):
+        """The purpose of this method is to return a bool indicating all _words were typed
+
+        Args:
+            self - An instance of WordManager
+
+        Returns:
+            typed - True if all words are guessed and reset should be called
+        """
+        for word in self._words:
+            if word.get_typed() == False:
+                return False
+            
+        return True
