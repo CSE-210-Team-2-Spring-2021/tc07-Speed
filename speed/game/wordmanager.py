@@ -67,16 +67,15 @@ class WordManager:
             velocity = Point(1,0) #Probably changing this later
             word.set_word(self._word_strings[i], location, velocity, self._points[i])
         
-	def move_words(self):
+    def move_words(self):
         """Updates the position of word based on velocity (look at snake.py)
-        
+
         Args:
-            self - An instance of Food
-        """
+            self - An instance of Food"""
         for word in self._words:
             word.move_next()
 
-	def update_words(self, i):
+    def update_words(self, i):
         """Move the word at given index from _words to _words_guessed
         
         Args:
@@ -94,16 +93,16 @@ class WordManager:
         """
         return self._words_string
         
-	def get_words(self):
-            """Returns _words list
+    def get_words(self):
+        """Returns _words list
         
         Args:
             self - An instance of Food 
         """
         return self._words
 
-	def get_points(self):
-            """returns point value (score)
+    def get_points(self):
+        """returns point value (score)
         
         Args:
             self - An instance of Food 
