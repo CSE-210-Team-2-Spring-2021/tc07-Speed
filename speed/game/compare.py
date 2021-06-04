@@ -2,9 +2,6 @@ class Compare:
     """ Service Provider - Compares what is typed in Buffer with word list from words.py
     """
 
-    def __init__(self):
-        super().__init__()
-
     def comparison(self, words, buffer):
         """ Determines if the input (Buffer) matches the words (Word) on screen
 
@@ -17,4 +14,4 @@ class Compare:
             if word == buffer:
                 return i
             else:
-                return "9999999"
+                return 9999999
