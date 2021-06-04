@@ -13,8 +13,8 @@ class Compare:
 
             Returns - index of matched word
         """
-        for word in words:
+        for i, word in enumerate(words):
             if word == buffer:
-                return word
+                return i
             else:
                 return "9999999"
