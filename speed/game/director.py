@@ -1,8 +1,8 @@
 from time import sleep
 from game import constants
-from game.food import Food
+from game.word import Words
+from game.words_manager import WordsLocation
 from game.score import Score
-from game.snake import Snake
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -12,12 +12,13 @@ class Director:
         Controller
 
     Attributes:
-        food (Food): The snake's target.
+        
         input_service (InputService): The input mechanism.
         keep_playing (boolean): Whether or not the game can continue.
         output_service (OutputService): The output mechanism.
         score (Score): The current score.
-        snake (Snake): The player or snake.
+        words (Words): The words to display to screen.
+        words_manager(WordsLocation): The location of each word to display to screen.
     """
 
     def __init__(self, input_service, output_service):
@@ -26,12 +27,13 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self._food = Food()
+        self._words = Words()
+        self._words_location = WordsLocation()
         self._input_service = input_service
         self._keep_playing = True
         self._output_service = output_service
         self._score = Score()
-        self._snake = Snake()
+        
         
     def start_game(self):
         """Starts the game loop to control the sequence of play.
@@ -47,21 +49,21 @@ class Director:
 
     def _get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
-        that means getting the desired direction and moving the snake.
+        that means getting the next letter by user.
 
         Args:
             self (Director): An instance of Director.
         """
-        direction = self._input_service.get_direction()
-        self._snake.move_head(direction)
-
-    def _do_updates(self):
+        _letter = self._input_service.get_letter()
+        
+    def _do_updates(self, _letter):
         """Updates the important game information for each round of play. In 
-        this case, that means checking for a collision and updating the score.
+        this case, that means checking for a typed word and updating the score.
 
         Args:
             self (Director): An instance of Director.
         """
+        self.compare.compare_words(_letter)
         self._handle_body_collision()
         self._handle_food_collision()
         
