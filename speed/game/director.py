@@ -113,5 +113,5 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        if self._word_manager.all_typed == True:
+        if self._word_manager.all_typed() == True:
             self._word_manager.reset()

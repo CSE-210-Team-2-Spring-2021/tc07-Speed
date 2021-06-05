@@ -1,4 +1,6 @@
 import random
+import math
+from math import floor
 from game import constants
 from game.point import Point
 from game.word import Word
@@ -49,7 +51,8 @@ class WordManager:
 
         for i, position in enumerate(positions):
             self._word_strings[i] = all_words[position]
-            self._points[i] = 1
+            point_modifier = floor(len(self._word_strings[i])/3)
+            self._points[i] = 1 + point_modifier
     
     def _set_words(self):
         """Update the values of the _words list
@@ -65,7 +68,8 @@ class WordManager:
 
         for i, word in enumerate(self._words):
             location = Point(x[i], y[i])
-            velocity = Point(-1,0) #Probably changing this later
+            difficulty = constants.DIFFICULTY
+            velocity = Point(random.randint(-difficulty,difficulty), random.randint(-difficulty,difficulty))
             word.set_word(self._word_strings[i], location, velocity, self._points[i])
         
     def move_words(self):
@@ -85,7 +89,8 @@ class WordManager:
             i - index of matching word 
         """
         self._words_guessed.append(self._word_strings[i])
-        self._words[i].word_typed()
+        score = self._points[i]
+        self._words[i].word_typed(score)
 
     def get_word_strings(self):
         """Returns _words_string list
