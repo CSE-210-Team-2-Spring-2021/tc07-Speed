@@ -4,7 +4,7 @@ from game import constants
 from game.wordmanager import WordManager
 from game.score import Score
 from game.compare import Compare
-from game.buffer import Buffer
+from game.output_service import Buffer
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -71,13 +71,9 @@ class Director:
         self._check_typed_word()
         self._check_all_typed()
         self._words_location = self._word_manager.move_words()
-        words_len = len(self._word_manager.get_words())
-        for i in range(0, words_len):
-            point_value = self._word_manager.get_points(i)
-            self._score.add_points(point_value)
-
-
-
+        self._score.add_points()
+               
+        
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
         this case, that means displaying the letters typed in Buffer, display
@@ -88,7 +84,7 @@ class Director:
         """
         
         self._output_service.clear_screen()
-        self._output_service.draw_words(self._words_location())
+        self._output_service.draw_words_location(self._words_location())
         self._output_service.draw_actor(self._score)
         self._output_service.draw_buffer_text(self._buffer_text())
         if self._buffer_text == "*":
@@ -100,7 +96,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._index = self._compare.comparison(self._word_manager.get_words_string(), self._buffer_text)
+        self._index = self._compare.comparison(self._word_manager.get_words_string())
         if self._index < (constants.MAX_WORDS - 1):
             self._word_manager.update_words(self._index)
             self._word_manager.get_points(self._index)
