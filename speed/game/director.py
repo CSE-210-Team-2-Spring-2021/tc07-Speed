@@ -96,8 +96,10 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        if self._compare.comparison():
-            self._points += 1
+        self._index = self._compare.comparison(self._word_manager.get_words_string())
+        if self._index < (constants.MAX_WORDS - 1):
+            self._word_manager.update_words(self._index)
+            self._word_manager.get_points(self._index)
 
     def _check_all_typed(self):
         """Checks to see if all words on screen have been typed. If True,
