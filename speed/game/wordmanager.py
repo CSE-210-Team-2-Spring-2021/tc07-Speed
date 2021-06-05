@@ -105,7 +105,7 @@ class WordManager:
         """
         return self._words
 
-    def get_points(self):
+    def get_points_list(self):
         """Returns point value list(score)
         
         Args:
