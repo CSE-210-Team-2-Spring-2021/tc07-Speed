@@ -24,7 +24,7 @@ class Buffer(Actor):
         self.set_text(f"Buffer: {self._word}")
     
 
-    def add_letters(self, letter):
+    def add_letter(self, letter):
         """Adds the given letters to the current word and updates the buffer.
         
         Args:

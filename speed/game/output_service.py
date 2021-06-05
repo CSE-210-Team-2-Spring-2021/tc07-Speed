@@ -44,9 +44,9 @@ class OutputService:
         position = actor.get_position()
         x = position.get_x()                         
         y = position.get_y()
-        wordLenght = len(text)
-        if wordLenght >=constants.MAX_X:                                     # Not sure if this conditional should be here
-                x = constants.MAX_X-wordLenght                               
+        wordLength = len(text)
+        if wordLength >=constants.MAX_X:                                     # Not sure if this conditional should be here
+                x = constants.MAX_X-wordLength                               
         self._screen.print_at(text, x, y, 7)  
 
     def draw_words(self, words):

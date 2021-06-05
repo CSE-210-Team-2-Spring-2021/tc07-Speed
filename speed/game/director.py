@@ -4,7 +4,7 @@ from game import constants
 from game.wordmanager import WordManager
 from game.score import Score
 from game.compare import Compare
-from game.output_service import Buffer
+from game.buffer import Buffer
 
 class Director:
     """A code template for a person who directs the game. The responsibility of 
@@ -45,6 +45,7 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        self._word_manager.reset()
         while self._keep_playing:
             self._get_inputs()
             self._do_updates()
@@ -58,7 +59,8 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._letter = self._input_service.get_letter()
+        letter = self._input_service.get_letter()
+        self._buffer_text.add_letter(letter)
                 
     def _do_updates(self):
         """Updates the important game information for each round of play. In 
@@ -71,8 +73,6 @@ class Director:
         self._check_typed_word()
         self._check_all_typed()
         self._words_location = self._word_manager.move_words()
-        self._score.add_points()
-               
         
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -84,11 +84,11 @@ class Director:
         """
         
         self._output_service.clear_screen()
-        self._output_service.draw_words_location(self._words_location())
+        words = self._word_manager.get_words()
+        self._output_service.draw_words(words)
         self._output_service.draw_actor(self._score)
-        self._output_service.draw_buffer_text(self._buffer_text())
-        if self._buffer_text == "*":
-            self._output_service.flush_buffer()
+        self._output_service.draw_actor(self._buffer_text)
+        self._output_service.flush_buffer()
 
     def _check_typed_word(self):
         """checks for typed words and if so, updating the score 1.
@@ -96,10 +96,13 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        self._index = self._compare.comparison(self._word_manager.get_words_string())
-        if self._index < (constants.MAX_WORDS - 1):
-            self._word_manager.update_words(self._index)
-            self._word_manager.get_points(self._index)
+        word_strings = self._word_manager.get_word_strings()
+        buffer = self._buffer_text.get_word()
+        index = self._compare.comparison(word_strings, self._buffer_text.get_word())
+        if index < (constants.MAX_WORDS - 1):
+            self._word_manager.update_words(index)
+            point = self._word_manager.get_points(index)
+            self._score.add_points(point)
 
     def _check_all_typed(self):
         """Checks to see if all words on screen have been typed. If True,
