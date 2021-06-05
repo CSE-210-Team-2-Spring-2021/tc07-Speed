@@ -31,7 +31,6 @@ class InputService:
         result = ""
         event = self._screen.get_key()
         if not event is None:
-            print(event)
             if event == -1:
                 sys.exit()
             elif event == 13: 

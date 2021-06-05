@@ -25,8 +25,8 @@ class WordManager:
             self -  An instance of WordManager 
         
         """
-        self._word_strings = ['', '', '', '', '']
-        self._words = [Word(), Word(), Word(), Word(), Word()]
+        self._word_strings = ['', '', '', '']
+        self._words = [Word(), Word(), Word(), Word()]
         self._points = [1, 1, 1, 1, 1]
         self._words_guessed = []
 
@@ -36,6 +36,7 @@ class WordManager:
         Args:
             self -  An instance of WordManager
         """
+        self._append_word()
         self._choose_words()
         self._set_words()
 
@@ -47,7 +48,7 @@ class WordManager:
         """
         all_words = constants.LIBRARY
         value_range = range(len(all_words))
-        positions= random.sample(value_range, constants.STARTING_WORDS)
+        positions= random.sample(value_range, len(self._words))
 
         for i, position in enumerate(positions):
             self._word_strings[i] = all_words[position]
@@ -60,7 +61,7 @@ class WordManager:
         Args:
             self -  An instance of WordManager
         """
-        num_words = constants.STARTING_WORDS
+        num_words = len(self._words)
         x_range = range(constants.MAX_X)
         y_range = range(constants.MAX_Y)
         x = random.sample(x_range, num_words)
@@ -71,6 +72,18 @@ class WordManager:
             difficulty = constants.DIFFICULTY
             velocity = Point(random.randint(-difficulty,difficulty), random.randint(-difficulty,difficulty))
             word.set_word(self._word_strings[i], location, velocity, self._points[i])
+
+    def _append_word(self):
+        """Adds a word to the words list
+
+        Args:
+            self - An instance of WordManager
+        """
+        if len(self._words) < constants.MAX_WORDS:
+            self._words.append(Word())
+            self._word_strings.append('')
+            self._points.append(1)
+        
         
     def move_words(self):
         """Updates the position of word based on velocity (look at snake.py)

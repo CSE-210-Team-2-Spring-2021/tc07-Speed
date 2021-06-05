@@ -34,7 +34,8 @@ class Buffer(Actor):
         if letter == "*":
             self._word = ""
         elif letter == '%':
-            self._word = self._word.rstrip(self._word[-1])
+            if self._word != '':
+                self._word = self._word.rstrip(self._word[-1])
         else:
             self._word += letter 
             
