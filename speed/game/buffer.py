@@ -31,10 +31,19 @@ class Buffer(Actor):
             self (Buffer): An instance of Buffer.
             letter (string): The letter to add.
         """
-        if letter != "*":
-            self._word += letter               
+        if letter == "*":
+            self._word = ""                
         else:
-            self._word = ""
+            self._word += letter 
+            
+        self.set_text(f"Buffer: {self._word}")
+
+    def reset(self):
+        """Resets the buffer to empty
+        Args:
+            self (Buffer): An instance of Buffer.
+        """
+        self._word = ''
         self.set_text(f"Buffer: {self._word}")
 
     def get_word(self):
