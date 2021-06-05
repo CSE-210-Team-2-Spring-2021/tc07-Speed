@@ -11,8 +11,7 @@ class Compare:
             Returns - index of matched word
         """
         for i, word in enumerate(words):
-
             if word == buffer:
                 return i
-            else:
-                return 9999999
+            
+        return 9999999

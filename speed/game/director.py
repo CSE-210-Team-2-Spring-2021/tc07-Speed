@@ -60,6 +60,7 @@ class Director:
             self (Director): An instance of Director.
         """
         letter = self._input_service.get_letter()
+        print(letter)
         self._buffer_text.add_letter(letter)
                 
     def _do_updates(self):
@@ -98,11 +99,12 @@ class Director:
         """
         word_strings = self._word_manager.get_word_strings()
         buffer = self._buffer_text.get_word()
-        index = self._compare.comparison(word_strings, self._buffer_text.get_word())
+        index = self._compare.comparison(word_strings, buffer)
         if index < (constants.MAX_WORDS - 1):
             self._word_manager.update_words(index)
             point = self._word_manager.get_points(index)
             self._score.add_points(point)
+            self._buffer_text.reset()
 
     def _check_all_typed(self):
         """Checks to see if all words on screen have been typed. If True,
