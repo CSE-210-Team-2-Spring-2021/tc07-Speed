@@ -53,13 +53,13 @@ class Word(Actor):
         """
         return self._points
 
-    def word_typed(self):
+    def word_typed(self, score):
         """Runs when a word is typed, sets text to '-' and _typed to True
 
         Args:
             self - An instance of Word
         """
-        self.set_text('-')
+        self.set_text(f'+{score}')
         self._typed = True
     
     def get_typed(self):
