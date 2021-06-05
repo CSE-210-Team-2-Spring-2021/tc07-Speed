@@ -58,4 +58,5 @@ root                    (project root folder)
   Nathaniel Jackson - jac20003@byui.edu
   Chase Patterson - pat20001@byui.edu
   Kyle Ames - ame18007@byui.edu
+  TJ Anderson - and15126@byui.edu
 
