@@ -32,7 +32,9 @@ class Buffer(Actor):
             letter (string): The letter to add.
         """
         if letter == "*":
-            self._word = ""                
+            self._word = ""
+        elif letter == '%':
+            self._word = self._word.rstrip(self._word[-1])
         else:
             self._word += letter 
             
