@@ -26,6 +26,7 @@ class WordManager:
         self._word_strings = ['', '', '', '', '']
         self._words = [Word(), Word(), Word(), Word(), Word()]
         self._points = [1, 1, 1, 1, 1]
+        self._words_guessed = []
 
     def reset(self):
         """Sets the field with new words.
@@ -64,7 +65,7 @@ class WordManager:
 
         for i, word in enumerate(self._words):
             location = Point(x[i], y[i])
-            velocity = Point(1,0) #Probably changing this later
+            velocity = Point(-1,0) #Probably changing this later
             word.set_word(self._word_strings[i], location, velocity, self._points[i])
         
     def move_words(self):
@@ -86,13 +87,13 @@ class WordManager:
         self._words_guessed.append(self._word_strings[i])
         self._words[i].word_typed()
 
-    def get_words_string(self):
+    def get_word_strings(self):
         """Returns _words_string list
         
         Args:
             self - An instance of WordManager
         """
-        return self._words_string
+        return self._word_strings
         
     def get_words(self):
         """Returns _words list
