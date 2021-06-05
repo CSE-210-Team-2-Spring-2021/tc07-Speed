@@ -12,7 +12,7 @@ class WordManager:
     Attributes:
         _words          (list) - Holds the set of word objects
         _words_guessed  (list) - Contains all guessed words
-        _word_strings   (list) - holds the strings chosen for the word objedcts
+        _words_string   (list) - holds the strings chosen for the word objedcts
         _points         (list) - Holds the value of points each word is worth
     """
 
@@ -23,7 +23,7 @@ class WordManager:
             self -  An instance of WordManager 
         
         """
-        self._word_strings = ['', '', '', '', '']
+        self._words_string = ['', '', '', '', '']
         self._words = [Word(), Word(), Word(), Word(), Word()]
         self._points = [1, 1, 1, 1, 1]
 
@@ -47,7 +47,7 @@ class WordManager:
         positions= random.sample(value_range, constants.STARTING_WORDS)
 
         for i, position in enumerate(positions):
-            self._word_strings[i] = all_words[position]
+            self._words_string[i] = all_words[position]
             self._points[i] = 1
     
     def _set_words(self):
@@ -65,7 +65,7 @@ class WordManager:
         for i, word in enumerate(self._words):
             location = Point(x[i], y[i])
             velocity = Point(1,0) #Probably changing this later
-            word.set_word(self._word_strings[i], location, velocity, self._points[i])
+            word.set_word(self._words_string[i], location, velocity, self._points[i])
         
     def move_words(self):
         """Updates the position of word based on velocity (look at snake.py)
@@ -83,7 +83,7 @@ class WordManager:
             self - An instance of WordManager
             i - index of matching word 
         """
-        self._words_guessed.append(self._word_strings[i])
+        self._words_guessed.append(self._words_string[i])
         self._words[i].word_typed()
 
     def get_words_string(self):
