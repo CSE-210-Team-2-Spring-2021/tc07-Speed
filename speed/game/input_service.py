@@ -31,10 +31,13 @@ class InputService:
         result = ""
         event = self._screen.get_key()
         if not event is None:
+            print(event)
             if event == -1:
                 sys.exit()
             elif event == 13: 
                 result = "*"
+            elif event == -300:
+                result = '%'
             elif event >= 97 and event <= 122: 
                 result = chr(event)
         return result
